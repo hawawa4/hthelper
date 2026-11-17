@@ -27,7 +27,7 @@ While you're in Harvest Temple, the addon writes ArcDPS combat events to CSV fil
 Linux (cross-compile):
 ```sh
 sudo apt install g++-mingw-w64-x86-64-posix
-make            # -> build/htcm_helper.dll
+make            # downloads ImGui 1.80 the first time (needs curl) -> build/htcm_helper.dll
 ```
 Windows (MSVC): `cmake -B build -A x64 && cmake --build build --config Release`
 
@@ -37,5 +37,5 @@ Copy `htcm_helper.dll` into `<GW2>/addons/`, then enable it in the Nexus menu (C
 ## Layout
 - `src/main.cpp`: the addon
 - `src/Nexus.h`: a minimal copy of the Nexus API v6 structs, plus the ArcDPS and MumbleLink structs it needs
-- `third_party/imgui`: ImGui 1.80, the version Nexus uses (MIT)
+- `third_party/imgui`: ImGui 1.80, the version Nexus uses (MIT). Not committed: `make` downloads it on first build and checks its SHA-256. CMake fetches the same tarball with `FetchContent`. `make distclean` removes it.
 - `third_party/fonts`: the [Anton](https://github.com/googlefonts/AntonFont) font (SIL OFL 1.1), cut down to printable ASCII. It's embedded as `src/font_anton.h` (regenerate with `xxd -i -n AntonAscii_ttf`). The addon registers it with Nexus at the pixel size your resolution needs, so the text is drawn at 1:1 instead of stretched.
