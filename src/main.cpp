@@ -18,6 +18,9 @@
 #include "imgui.h"
 #include "Nexus.h"
 #include "font_anton.h"
+#include "Recorder.h"
+
+#include <shellapi.h>
 
 namespace
 {
@@ -100,12 +103,14 @@ namespace
 	{
 		EventsLocal++;
 		HandleCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
+		Recorder::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs), "local");
 	}
 
 	void OnCombatSquad(void* aEventArgs)
 	{
 		EventsSquad++;
 		HandleCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
+		Recorder::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs), "squad");
 	}
 
 	const char* StatechangeName(int aState)
@@ -249,6 +254,12 @@ namespace
 			IsDead = false;
 		}
 
+		// New instance -> recorder starts a new file on the next event.
+		if (Mumble)
+		{
+			Recorder::SetLocation(mapID, Mumble->Context.ShardID, Mumble->Context.Instance);
+		}
+
 		bool show = Preview;
 		if (IsDead)
 		{
@@ -308,6 +319,38 @@ namespace
 		ImGui::TextDisabled("Requires ArcDPS for death detection.");
 
 		ImGui::Separator();
+		ImGui::Text("Recording");
+		bool rec = Recorder::Enabled;
+		if (ImGui::Checkbox("Record combat events", &rec))
+		{
+			Recorder::Enabled = rec;
+			if (!rec) { Recorder::Split(); }
+		}
+		bool anyMap = Recorder::AnyMap;
+		if (ImGui::Checkbox("Record outside Harvest Temple too", &anyMap))
+		{
+			Recorder::AnyMap = anyMap;
+			Recorder::Split();
+		}
+		Recorder::Stats_t st = Recorder::GetStats();
+		if (st.FileOpen)
+		{
+			ImGui::Text("Writing: %s", st.FilePath.c_str());
+		}
+		else
+		{
+			ImGui::TextDisabled("Not writing (starts on the first event in Harvest Temple).");
+		}
+		ImGui::Text("Lines: %llu, written: %.1f KB%s", (unsigned long long)st.Lines, st.Bytes / 1024.0,
+			st.Dropped ? " (some lines dropped!)" : "");
+		if (ImGui::Button("Start new file")) { Recorder::Split(); }
+		ImGui::SameLine();
+		if (ImGui::Button("Open recordings folder"))
+		{
+			ShellExecuteA(nullptr, "open", Recorder::GetDirectory().c_str(), nullptr, nullptr, SW_SHOWNORMAL);
+		}
+
+		ImGui::Separator();
 		ImGui::Text("Diagnostics");
 		ImGui::Text("Map ID: %u (Harvest Temple = %u)%s", CurrentMapID(), HARVEST_TEMPLE,
 			CurrentMapID() == HARVEST_TEMPLE ? "  [match]" : "");
@@ -331,6 +374,9 @@ namespace
 
 		LoadFonts();
 
+		const char* addonDir = aApi->Paths.GetAddonDirectory("HTCMHelper");
+		Recorder::Init(std::string(addonDir ? addonDir : "addons/HTCMHelper") + "\\recordings");
+
 		aApi->Events.Subscribe("EV_ARCDPS_COMBATEVENT_LOCAL_RAW", OnCombatLocal);
 		aApi->Events.Subscribe("EV_ARCDPS_COMBATEVENT_SQUAD_RAW", OnCombatSquad);
 		aApi->Renderer.Register(ERenderType::Render, OnRender);
@@ -346,6 +392,7 @@ namespace
 		APIDefs->Events.Unsubscribe("EV_ARCDPS_COMBATEVENT_LOCAL_RAW", OnCombatLocal);
 		APIDefs->Events.Unsubscribe("EV_ARCDPS_COMBATEVENT_SQUAD_RAW", OnCombatSquad);
 		UnloadFonts();
+		Recorder::Shutdown();
 
 		Mumble  = nullptr;
 		APIDefs = nullptr;
@@ -364,7 +411,7 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
 	AddonDef.Signature   = 0x48544D43; // "HTMC" - arbitrary, must be unique among addons
 	AddonDef.APIVersion  = NEXUS_API_VERSION;
 	AddonDef.Name        = ADDON_NAME;
-	AddonDef.Version     = { 0, 1, 4, 0 };
+	AddonDef.Version     = { 0, 2, 0, 0 };
 	AddonDef.Author      = "hawa";
 	AddonDef.Description = "Harvest Temple CM helper: flashes LEAVE THE INSTANCE NOW when you die.";
 	AddonDef.Load        = AddonLoad;

@@ -8,9 +8,11 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
 add_library(htcm_helper SHARED
     src/main.cpp
+    src/Recorder.cpp
     third_party/imgui/imgui.cpp
     third_party/imgui/imgui_draw.cpp
     third_party/imgui/imgui_widgets.cpp
     third_party/imgui/imgui_tables.cpp)
 target_include_directories(htcm_helper PRIVATE third_party/imgui)
 target_compile_definitions(htcm_helper PRIVATE WIN32_LEAN_AND_MEAN NOMINMAX)
+target_link_libraries(htcm_helper PRIVATE winmm)

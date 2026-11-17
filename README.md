@@ -9,6 +9,20 @@ A Guild Wars 2 [Nexus](https://github.com/RaidcoreGG/Nexus) addon for the Harves
 - **Map:** reads MumbleLink (`DL_MUMBLE_LINK`). By default the overlay only shows in Harvest Temple (map 1437), and it clears when you change maps.
 - **Options** (Nexus → Addons → HTCM Helper): turn off the map filter, preview the overlay, see the current map ID.
 
+## Recording
+While you're in Harvest Temple, the addon writes ArcDPS combat events to CSV files in `<GW2>/addons/HTCMHelper/recordings/`. It starts a new file for each instance, named `map<id>_<date>_<time>_<n>.csv`. Pulls are marked inside the file by `9:SQCOMBATSTART` / `10:SQCOMBATEND` state changes.
+
+| kind | what | notes |
+|---|---|---|
+| `AGENT_ADD` / `AGENT_REMOVE` | an agent entered or left tracking | for NPCs, `src_prof` is the **species ID** |
+| `TARGET_CHANGE` | you changed target | |
+| `CAST` | NPC/gadget skill activation (`START`, `CANCEL_*`, ...) | `skill_id`, `skill_name`; `value` = expected cast time in ms |
+| `STATECHANGE` | everything except position/velocity/facing | `sub` = `code:NAME` |
+| `BUFF_APPLY` / `BUFF_REMOVE` | buffs involving an NPC, or landing on you | `value` = duration in ms |
+| `DMG_SEC` | squad (players + their pets) damage to one NPC, summed per second | `value` = damage, `buff_dmg` = number of hits |
+
+`time` is ArcDPS's millisecond clock. `stream` says which Nexus event the row came from (`local` = `EV_ARCDPS_COMBATEVENT_LOCAL_RAW`, `squad` = `..._SQUAD_RAW`). Turn recording off, or on for every map, in the addon options.
+
 ## Build
 Linux (cross-compile):
 ```sh

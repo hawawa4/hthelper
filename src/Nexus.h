@@ -56,6 +56,7 @@ typedef void  (*GUI_REMRENDER)    (GUI_RENDER aRenderCallback);
 typedef void  (*LOGGER_LOG2)      (ELogLevel aLogLevel, const char* aChannel, const char* aStr);
 typedef void  (*EVENTS_SUBSCRIBE) (const char* aIdentifier, EVENT_CONSUME aConsumeEventCallback);
 typedef void* (*DATALINK_GET)     (const char* aIdentifier);
+typedef const char* (*PATHS_GETADDONDIR)(const char* aName);
 
 struct ImFont;
 struct ImFontConfig;
@@ -82,8 +83,13 @@ struct AddonAPI_t
 	/* UI: SendAlert, RegisterCloseOnEscape, DeregisterCloseOnEscape */
 	void*         UI[3];
 
-	/* Paths: GetGameDirectory, GetAddonDirectory, GetCommonDirectory */
-	void*         Paths[3];
+	/* Paths */
+	struct
+	{
+		void*              GetGameDirectory;
+		PATHS_GETADDONDIR  GetAddonDirectory;
+		void*              GetCommonDirectory;
+	} Paths;
 
 	/* MinHook: Create, Remove, Enable, Disable */
 	void*         MinHook[4];
