@@ -1,0 +1,1061 @@
+{
+ "source": {
+  "repo": "https://github.com/baaron4/GW2-Elite-Insights-Parser",
+  "commit": "5bddc4c16fa06b6d41c194bee45082b78535ba21",
+  "file": "GW2EI.Library/GW2EI.Services/GW2EIEvtcParser/LogLogic/Raids/RaidEncounters/EndOfDragons/Bosses/HarvestTemple.cs"
+ },
+ "skills": {
+  "AbominationSwipe": 64396,
+  "AchievementEligibilityVoidwalker": 68066,
+  "BrandedArtillery": 64317,
+  "BrandingBeam": 65017,
+  "BreathOfJormagCenter": 67607,
+  "BreathOfJormagNorth": 65517,
+  "BreathOfJormagSouth": 66216,
+  "CallLightning": 66424,
+  "ChargedShot": 63772,
+  "ClawSlap": 63588,
+  "CrystalBarrage": 66790,
+  "DeathScream": 66886,
+  "Determined895": 895,
+  "FlamesOfPrimordus": 66646,
+  "FrostMeteor": 65687,
+  "FrozenFury": 65498,
+  "GlacialSlam": 66446,
+  "GraspOfJormag": 67772,
+  "GraspOfTheVoid": 64161,
+  "GravityCrushDamage": 65180,
+  "HarvestTempleGravityBallSelfBuff": 64903,
+  "HarvestTempleLiftOff": 63896,
+  "HarvestTempleTargetedExpulsionCM": 65680,
+  "HarvestTempleTargetedExpulsionNM": 66025,
+  "HydroBurst": 65252,
+  "InfluenceOfTheVoidBuff": 64524,
+  "InfluenceOfTheVoidSkill": 66566,
+  "JawsOfDestruction": 65704,
+  "Kick": 27266,
+  "LavaSlam": 65427,
+  "LightningOfJormag": 63881,
+  "MagicDischarge": 65488,
+  "MagicHail": 64582,
+  "MordremothShockwave": 64810,
+  "NightmareEpochDamage": 63691,
+  "PoisonRoar": 64576,
+  "PutridDeluge": 65132,
+  "RollingFlame": 67646,
+  "RottingBile": 67040,
+  "ScreamOfZhaitanCM": 64428,
+  "ScreamOfZhaitanNM": 66658,
+  "ShatterEarth": 67104,
+  "ShatterEarth2": 65241,
+  "Stability": 1122,
+  "Stomp": 63767,
+  "Stormfall": 63607,
+  "Stun": 872,
+  "SwarmOfMordremoth": 67688,
+  "SwarmOfMordremoth_CorruptedWaters": 67703,
+  "SwarmOfMordremoth_PoolOfUndeath": 63544,
+  "TormentOfTheVoid": 64150,
+  "TsunamiSlamClawOrb": 64748,
+  "TsunamiSlamTail": 65192,
+  "TsunamiSlamTailOrb": 66489,
+  "TsunaniSlamClaw": -53,
+  "Unknown": -1,
+  "VoidEmpowerment": 68083,
+  "VoidExplosion120Radius": 65595,
+  "VoidExplosion180Radius": 64557,
+  "VoidExplosion240Radius": 64585,
+  "VoidObliteratorCharge": 61895,
+  "VoidObliteratorChargeWindup": 61713,
+  "VoidObliteratorFirebomb": 61838,
+  "VoidObliteratorWyvernBreathDamage": 65462,
+  "VoidObliteratorWyvernBreathSkill": 64849,
+  "VoidPoolCM": 63910,
+  "VoidPoolKralkatorrik": 63746,
+  "VoidPoolNM": 65578,
+  "VoidPoolSooWon": 67739,
+  "VoidPurge": 64064,
+  "VoidShell": 65563,
+  "ZhaitanTailSlam": 64932,
+  "ZhaitansReachGroundSlam": 66534,
+  "ZhaitansReachGroundSlamHT": 64526,
+  "ZhaitansReachThrashHT1": 64124,
+  "ZhaitansReachThrashHT2": 64998
+ },
+ "species": {
+  "DragonEnergyOrb": 21941,
+  "GravityBall": -50,
+  "HTGreenJormagEast": -111,
+  "HTGreenJormagSouthEast": -112,
+  "HTGreenJormagWest": -110,
+  "HTGreenPrimordusNorth": -115,
+  "HTGreenPrimordusNorthEast": -114,
+  "HTGreenPrimordusNorthWest": -113,
+  "HTGreenSooWonNorthEast": -119,
+  "HTGreenSooWonSouth": -121,
+  "HTGreenSooWonSouthEast": -120,
+  "HTGreenZhaitanNorthWest": -116,
+  "HTGreenZhaitanSouth": -118,
+  "HTGreenZhatainNorthEast": -117,
+  "JormagMovingFrostBeam": -51,
+  "JormagMovingFrostBeamCenter": 23747,
+  "JormagMovingFrostBeamNorth": 24541,
+  "KillableVoidAmalgamate": 23956,
+  "PushableVoidAmalgamate": -23,
+  "TheDragonVoidJormag": -21,
+  "TheDragonVoidKralkatorrik": -19,
+  "TheDragonVoidMordremoth": -20,
+  "TheDragonVoidPrimordus": -22,
+  "TheDragonVoidSooWon": -18,
+  "TheDragonVoidUnknown": -109,
+  "TheDragonVoidZhaitan": -17,
+  "VoidAbomination": 23936,
+  "VoidAmalgamate": 24375,
+  "VoidBrandbomber": 24783,
+  "VoidBurster": 24464,
+  "VoidColdsteel": 23945,
+  "VoidGiant": 24450,
+  "VoidGoliath": 24761,
+  "VoidMelter": 24223,
+  "VoidObliterator": 23995,
+  "VoidRotswarmer": 24590,
+  "VoidSaltsprayDragon": 23846,
+  "VoidSkullpiercer": 25177,
+  "VoidStormseer": 24677,
+  "VoidTangler": 25138,
+  "VoidTimeCaster": 25025,
+  "VoidWarforgedElite": 24129,
+  "VoidWarforgedVeteran": 24855,
+  "ZhaitansReach": 23839
+ },
+ "effects": {
+  "HarvestTempleFailedGreen": "F4F80E9AF2B6AF49AFE46D8CF797B604",
+  "HarvestTempleGreen": "3EEDE16455C8C8449237BCC77F107548",
+  "HarvestTempleInfluenceOfTheVoidPool": "912F68E45158C14E9A30D6011B7B0C7F",
+  "HarvestTempleJormagFrostMeteorIceField": "40C38381C43B184A885960714F9388D5",
+  "HarvestTempleJormagGraspOfJormagIndicator": "3A39297503D1C542AFC16CB5C1D2D3F7",
+  "HarvestTempleKralkatorrikBeamAoe": "8B55EBC6025EB3429D464EDA5710E419",
+  "HarvestTempleKralkatorrikBeamIndicator": "4ACBA11BFAC6B940BF6FD11CB332FFB8",
+  "HarvestTempleKralkatorrikCrystalBarrageImpact": "32B9E497929F054E8633EF013583E20C",
+  "HarvestTempleMordremothPoisonRoarImpact": "E500544171F13643899C178EC3FB38A9",
+  "HarvestTempleMordremothShockwave1": "3DFB20FECCAF794EA194E1F93CB0146A",
+  "HarvestTempleOrbExplosion": "B329CFB6B354C148A537E114DC14CED6",
+  "HarvestTemplePrimordusJawsOfDestructionDamage": "363F831AD54DB7489DFDC31F659B222E",
+  "HarvestTemplePrimordusJawsOfDestructionIndicator": "4D8CA1836969BD4BBF345719576ACAAF",
+  "HarvestTemplePrimordusLavaSlamHitIndicator": "EDA1C033B296404BA403E106F6F258C0",
+  "HarvestTemplePurificationBeeLaunch": "73FE43AEE78ADC4B9527DF683481984F",
+  "HarvestTemplePurificationFlamesOfPrimordus": "D2CDF45D796C864B8B8BF81C264A4B49",
+  "HarvestTemplePurificationFlamesOfPrimordusIndicator": "D49EB86EB17A0D4793768B19978C1B2C",
+  "HarvestTemplePurificationLightningOfJormag": "ADDDB6E725094240845270262E59F2BD",
+  "HarvestTemplePurificationOrbSpawns": "4F982CD060507C44A25844BF0ADFCB54",
+  "HarvestTemplePurificationPoolOfUndeath": "CCBA0AD77B52774DA48EE37AED9108F4",
+  "HarvestTemplePurificationStormfall": "F5A9E487E2B3A64A83661D87DE1CAF1F",
+  "HarvestTemplePurificationZones": "D5B07DF36991DD48B64AC403EFAA6F9F",
+  "HarvestTempleScalableOrangeAoE": "C1A523D71A841048897211B1020B8D95",
+  "HarvestTempleSooWonClawSlap": "CB877C57D1423240BACDF8D6B52A440F",
+  "HarvestTempleSooWonClawSlapOrbs": "F6964A4DE51DF04CA7E0F011BEE7D854",
+  "HarvestTempleSooWonTsunamiSlamClawIndicator": "0D594F550B0BF043B0B299FC26A8463B",
+  "HarvestTempleSuccessGreen": "72EE47DE4F63D3438E193578011FBCBF",
+  "HarvestTempleTargetedExpulsionSpreadCM": "BDF708225224C64183BA3CE2A609D37F",
+  "HarvestTempleTargetedExpulsionSpreadNM": "F39933B190100B4C87E808EF8E6C654A",
+  "HarvestTempleTormentOfTheVoidClawIndicator": "3F24896D3EF8D5459B399DAC8D0AD150",
+  "HarvestTempleTsunami1": "8F96447526A09B4F8545CBEA1B0046D4",
+  "HarvestTempleTsunamiSlamTailIndicator": "49BD7FF8309E4047B4D17C83E660A461",
+  "HarvestTempleVoidBrandbomberBrandedArtillery": "3ED61C8A1C2E594A8AD2E2E69AF16322",
+  "HarvestTempleVoidExplosion": "A478BD35F568974091FC99670B5A9700",
+  "HarvestTempleVoidGiantRottingBileDamage": "73931DCBD7D25E4FAE930BA1B896D07E",
+  "HarvestTempleVoidGiantRottingBileIndicator": "912F68E45158C14E9A30D6011B7B0C7F",
+  "HarvestTempleVoidGoliathGlacialSlam": "B28E156F3C93ED4B842B4479ABF5F5C1",
+  "HarvestTempleVoidObliteratorFirebomb": "D2E7228A6225FB44911507A45EF2CCEC",
+  "HarvestTempleVoidObliteratorShockwave": "4254DCF4AF72FF4A83847908DA98E427",
+  "HarvestTempleVoidObliteratorWyvernBreathFire": "453283E51FF9EF489980B6F0208F5F43",
+  "HarvestTempleVoidPoolOrbGettingReadyToBeDangerous": "D11320204E28E643A48469AA8E4845BA",
+  "HarvestTempleVoidPoolRedPuddleAoECM": "FF0A7D32AD894E45993BE5ED748BF484",
+  "HarvestTempleVoidPoolRedPuddleAoENM": "60EE2CA1A95C514F8A325B654E0D9478",
+  "HarvestTempleVoidPoolRedPuddleSelectionCM": "61C1CD7E89346843B04FCE613EC487AA",
+  "HarvestTempleVoidPoolRedPuddleSelectionNM": "0CD6F76C1BF9C049A2FCE4D86CB46475",
+  "HarvestTempleVoidSaltsprayDragonCallLightning": "6724030E0E64CA4E8D947A5CCFA8188E",
+  "HarvestTempleVoidSaltsprayDragonFrozenFuryCone": "ECD550A176BD9249A6925E8C2DD0CA30",
+  "HarvestTempleVoidSaltsprayDragonFrozenFuryRectangle": "56E2F67D3D550442A7BE11E85FDDE65D",
+  "HarvestTempleVoidSaltsprayDragonHydroBurstWhirlpools": "8198E9B46FF7AB438927745B76759A7F",
+  "HarvestTempleVoidSaltsprayDragonRollingFlames": "084A4E29CD66A04C9ECDB8033EFFE6A1",
+  "HarvestTempleVoidSaltsprayDragonShatterEarth": "5978C1D3AE4BCD4BAB286BF4FD8B24E9",
+  "HarvestTempleVoidSkullpiercerChargedShot": "2E9DC4D29F08554DA6ABB766A738FBF9",
+  "HarvestTempleVoidStormseerIceSpikeIndicator": "BFF48E3A55F94E48ACE3820EEB4B0E71",
+  "HarvestTempleVoidTimecasterGravityCrushIndicator": "1344E9C82608BB47AADA2B850DB7DEF7",
+  "HarvestTempleVoidTimecasterNightmareEpoch": "7D94F6283F23FC4A839D0F8EEE0549C5",
+  "HarvestTempleZhaitanPutridDelugeAoE": "82A8BC954DD69E4DBBF526EE1C6A3E74",
+  "HarvestTempleZhaitanPutridDelugeImpact": "FE8B96A200376B4BA75297FF2367C5C4",
+  "HarvestTempleZhaitanScreamIndicator": "12B49E1A9D034F45A3BD754331418F9B",
+  "HarvestTempleZhaitanTailSlamImpact": "7D0FBDEC2B1DEF4B8BC0FD6A5BFD3705"
+ },
+ "mechanics": [
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstEffectMechanic",
+   "short": "Spread.B",
+   "name": "Spread Bait",
+   "description": "Baited spread mechanic",
+   "ids": [
+    {
+     "effect": "HarvestTempleTargetedExpulsionSpreadNM",
+     "guid": "F39933B190100B4C87E808EF8E6C654A"
+    },
+    {
+     "effect": "HarvestTempleTargetedExpulsionSpreadCM",
+     "guid": "BDF708225224C64183BA3CE2A609D37F"
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageMechanic",
+   "short": "Spread.H",
+   "name": "Targeted Expulsion (Spread)",
+   "description": "Hit by Targeted Expulsion (Spread)",
+   "ids": [
+    {
+     "skill": "HarvestTempleTargetedExpulsionNM",
+     "id": 66025
+    },
+    {
+     "skill": "HarvestTempleTargetedExpulsionCM",
+     "id": 65680
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstEffectMechanic",
+   "short": "Red.B",
+   "name": "Red Bait",
+   "description": "Baited red puddle mechanic",
+   "ids": [
+    {
+     "effect": "HarvestTempleVoidPoolRedPuddleSelectionNM",
+     "guid": "0CD6F76C1BF9C049A2FCE4D86CB46475"
+    },
+    {
+     "effect": "HarvestTempleVoidPoolRedPuddleSelectionCM",
+     "guid": "61C1CD7E89346843B04FCE613EC487AA"
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Red.H",
+   "name": "Void Pool",
+   "description": "Hit by Red Void Pool",
+   "ids": [
+    {
+     "skill": "VoidPoolNM",
+     "id": 65578
+    },
+    {
+     "skill": "VoidPoolCM",
+     "id": 63910
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstBuffApplyMechanic",
+   "short": "Void.D",
+   "name": "Void Debuff",
+   "description": "Received Void debuff",
+   "ids": [
+    {
+     "skill": "InfluenceOfTheVoidBuff",
+     "id": 64524
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Void.H",
+   "name": "Void Hit",
+   "description": "Hit by Void",
+   "ids": [
+    {
+     "skill": "InfluenceOfTheVoidSkill",
+     "id": 66566
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerSrcAllHealthDamageHitsMechanic",
+   "short": "Orb Push",
+   "name": "Orb Push",
+   "description": "Orb was pushed by player",
+   "ids": []
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "AchievementEligibilityMechanic",
+   "short": "NopeRopes.Achiv.L",
+   "name": "Achiv Jumping Nope Ropes Lost",
+   "description": "Achievement Eligibility: Jumping the Nope Ropes Lost",
+   "ids": [
+    {
+     "other": "Ach_NopeRopes"
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "AchievementEligibilityMechanic",
+   "short": "NopeRopes.Achiv.K",
+   "name": "Achiv Jumping Nope Ropes Kept",
+   "description": "Achievement Eligibility: Jumping the Nope Ropes Kept",
+   "ids": [
+    {
+     "other": "Ach_NopeRopes"
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "VoidExp.H",
+   "name": "Void Explosion",
+   "description": "Hit by Void Explosion (Last Laugh)",
+   "ids": [
+    {
+     "skill": "VoidExplosion120Radius",
+     "id": 65595
+    },
+    {
+     "skill": "VoidExplosion180Radius",
+     "id": 64557
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "VoidExp.Champ.H",
+   "name": "Void Explosion Champion",
+   "description": "Hit by Void Explosion (Last Laugh, Champion)",
+   "ids": [
+    {
+     "skill": "VoidExplosion180Radius",
+     "id": 64557
+    },
+    {
+     "skill": "VoidExplosion240Radius",
+     "id": 64585
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "MagicDisc.H",
+   "name": "Magic Discharge",
+   "description": "Hit by Magic Discharge (Orb Explosion Wave)",
+   "ids": [
+    {
+     "skill": "MagicDischarge",
+     "id": 65488
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "EnemySrcEffectMechanic",
+   "short": "S.Green",
+   "name": "Success Green",
+   "description": "Green Successful",
+   "ids": [
+    {
+     "effect": "HarvestTempleSuccessGreen",
+     "guid": "72EE47DE4F63D3438E193578011FBCBF"
+    }
+   ]
+  },
+  {
+   "phase": "General",
+   "subgroup": null,
+   "kind": "EnemySrcEffectMechanic",
+   "short": "F.Green",
+   "name": "Failed Green",
+   "description": "Green Failed",
+   "ids": [
+    {
+     "effect": "HarvestTempleFailedGreen",
+     "guid": "F4F80E9AF2B6AF49AFE46D8CF797B604"
+    }
+   ]
+  },
+  {
+   "phase": "Purification 1",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Light.H",
+   "name": "Lightning of Jormag",
+   "description": "Hit by Lightning of Jormag",
+   "ids": [
+    {
+     "skill": "LightningOfJormag",
+     "id": 63881
+    }
+   ]
+  },
+  {
+   "phase": "Purification 1",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Flame.H",
+   "name": "Flames of Primordus",
+   "description": "Hit by Flames of Primordus",
+   "ids": [
+    {
+     "skill": "FlamesOfPrimordus",
+     "id": 66646
+    }
+   ]
+  },
+  {
+   "phase": "Purification 1",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Storm.H",
+   "name": "Kralkatorrik's Stormfall",
+   "description": "Hit by Kralkatorrik's Stormfall",
+   "ids": [
+    {
+     "skill": "Stormfall",
+     "id": 63607
+    }
+   ]
+  },
+  {
+   "phase": "Jormag",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "J.Breath.H",
+   "name": "Jormag Breath",
+   "description": "Hit by Jormag Breath",
+   "ids": [
+    {
+     "skill": "BreathOfJormagNorth",
+     "id": 65517
+    },
+    {
+     "skill": "BreathOfJormagSouth",
+     "id": 66216
+    },
+    {
+     "skill": "BreathOfJormagCenter",
+     "id": 67607
+    }
+   ]
+  },
+  {
+   "phase": "Jormag",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "J.Grasp.H",
+   "name": "Grasp of Jormag",
+   "description": "Hit by Grasp of Jormag",
+   "ids": [
+    {
+     "skill": "GraspOfJormag",
+     "id": 67772
+    }
+   ]
+  },
+  {
+   "phase": "Jormag",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "J.Meteor.H",
+   "name": "Jormag Meteor",
+   "description": "Hit by Jormag Meteor",
+   "ids": [
+    {
+     "skill": "FrostMeteor",
+     "id": 65687
+    }
+   ]
+  },
+  {
+   "phase": "Primordus",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Slam.H",
+   "name": "Primordus Slam",
+   "description": "Hit by Primordus Slam",
+   "ids": [
+    {
+     "skill": "LavaSlam",
+     "id": 65427
+    }
+   ]
+  },
+  {
+   "phase": "Primordus",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Jaws.H",
+   "name": "Primordus Jaws",
+   "description": "Hit by Primordus Jaws",
+   "ids": [
+    {
+     "skill": "JawsOfDestruction",
+     "id": 65704
+    }
+   ]
+  },
+  {
+   "phase": "Kralkatorrik",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Barrage.H",
+   "name": "Barrage",
+   "description": "Hit by Crystal Barrage",
+   "ids": [
+    {
+     "skill": "CrystalBarrage",
+     "id": 66790
+    }
+   ]
+  },
+  {
+   "phase": "Kralkatorrik",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Beam.H",
+   "name": "Kralkatorrik Beam",
+   "description": "Hit by Kralkatorrik's Branding Beam",
+   "ids": [
+    {
+     "skill": "BrandingBeam",
+     "id": 65017
+    }
+   ]
+  },
+  {
+   "phase": "Kralkatorrik",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Artillery.H",
+   "name": "Brandbomber Artillery",
+   "description": "Hit by Brandbomber Artillery",
+   "ids": [
+    {
+     "skill": "BrandedArtillery",
+     "id": 64317
+    }
+   ]
+  },
+  {
+   "phase": "Kralkatorrik",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "K.Pool.H",
+   "name": "Kralkatorrik Void Pool",
+   "description": "Hit by Kralkatorrik Void Pool",
+   "ids": [
+    {
+     "skill": "VoidPoolKralkatorrik",
+     "id": 63746
+    }
+   ]
+  },
+  {
+   "phase": "Purification 2",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Goop.H",
+   "name": "Heart Goop",
+   "description": "Hit by goop left by heart",
+   "ids": [
+    {
+     "skill": "SwarmOfMordremoth_PoolOfUndeath",
+     "id": 63544
+    }
+   ]
+  },
+  {
+   "phase": "Purification 2",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Bees.H",
+   "name": "Heart Bees",
+   "description": "Hit by bees from heart",
+   "ids": [
+    {
+     "skill": "SwarmOfMordremoth",
+     "id": 67688
+    }
+   ]
+  },
+  {
+   "phase": "Purification 2",
+   "subgroup": "Timecaster",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Grav.Cru.H",
+   "name": "Gravity Crush",
+   "description": "Hit by Gravity Crush",
+   "ids": [
+    {
+     "skill": "GravityCrushDamage",
+     "id": 65180
+    }
+   ]
+  },
+  {
+   "phase": "Purification 2",
+   "subgroup": "Timecaster",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "NigEpoch.H",
+   "name": "Nightmare Epoch",
+   "description": "Hit by Nightmare Epoch",
+   "ids": [
+    {
+     "skill": "NightmareEpochDamage",
+     "id": 63691
+    }
+   ]
+  },
+  {
+   "phase": "Mordremoth",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "ShckWv.H",
+   "name": "Mordremoth Shockwave",
+   "description": "Hit by Mordremoth's Shockwave",
+   "ids": [
+    {
+     "skill": "MordremothShockwave",
+     "id": 64810
+    }
+   ]
+  },
+  {
+   "phase": "Mordremoth",
+   "subgroup": null,
+   "kind": "EnemyCastStartMechanic",
+   "short": "ShckWv.Start",
+   "name": "Mordremoth Shockwave Start",
+   "description": "Mordremoth's Shockwave started",
+   "ids": [
+    {
+     "skill": "MordremothShockwave",
+     "id": 64810
+    }
+   ]
+  },
+  {
+   "phase": "Mordremoth",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "M.Poison.H",
+   "name": "Mordremoth Poison",
+   "description": "Hit by Mordremoth's Poison Roar",
+   "ids": [
+    {
+     "skill": "PoisonRoar",
+     "id": 64576
+    }
+   ]
+  },
+  {
+   "phase": "Mordremoth",
+   "subgroup": "Skullpiercer",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Kick.H",
+   "name": "Skullpiercer Kick",
+   "description": "Kicked by Void Skullpiercer",
+   "ids": [
+    {
+     "skill": "Kick",
+     "id": 27266
+    }
+   ]
+  },
+  {
+   "phase": "Mordremoth",
+   "subgroup": "Skullpiercer",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "ChrgShot.H",
+   "name": "Skullpiercer Charged Shot",
+   "description": "Hit by Void Skullpiercer's Charged Shot",
+   "ids": [
+    {
+     "skill": "ChargedShot",
+     "id": 63772
+    }
+   ]
+  },
+  {
+   "phase": "Giants",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Scream.G.CC",
+   "name": "Death Scream",
+   "description": "CC'd by Giant's Death Scream",
+   "ids": [
+    {
+     "skill": "DeathScream",
+     "id": 66886
+    }
+   ]
+  },
+  {
+   "phase": "Giants",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "RotBile.H",
+   "name": "Rotting Bile",
+   "description": "Hit by Giant's Rotting Bile",
+   "ids": [
+    {
+     "skill": "RottingBile",
+     "id": 67040
+    }
+   ]
+  },
+  {
+   "phase": "Giants",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Stomp.CC",
+   "name": "Stomp",
+   "description": "CC'd by Giant's Stomp",
+   "ids": [
+    {
+     "skill": "Stomp",
+     "id": 63767
+    }
+   ]
+  },
+  {
+   "phase": "Zhaitan",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Scream.H",
+   "name": "Zhaitan Scream",
+   "description": "Hit by Zhaitan Scream",
+   "ids": [
+    {
+     "skill": "ScreamOfZhaitanNM",
+     "id": 66658
+    },
+    {
+     "skill": "ScreamOfZhaitanCM",
+     "id": 64428
+    }
+   ]
+  },
+  {
+   "phase": "Zhaitan",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Z.Poison.H",
+   "name": "Zhaitan Poison",
+   "description": "Hit by Zhaitan Poison",
+   "ids": [
+    {
+     "skill": "PutridDeluge",
+     "id": 65132
+    }
+   ]
+  },
+  {
+   "phase": "Zhaitan",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "T.Slam.H",
+   "name": "Zhaitan Tail Slam",
+   "description": "Hit by Zhaitan's Tail Slam",
+   "ids": [
+    {
+     "skill": "ZhaitanTailSlam",
+     "id": 64932
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Prjtile.H",
+   "name": "Heart Projectile",
+   "description": "Hit by Corrupted Waters (Heart Projectile)",
+   "ids": [
+    {
+     "skill": "SwarmOfMordremoth_CorruptedWaters",
+     "id": 67703
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": "Saltspray",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Whrlpl.H",
+   "name": "Hydro Burst (Whirlpool)",
+   "description": "Hit by Hydro Burst (Whirlpool)",
+   "ids": [
+    {
+     "skill": "HydroBurst",
+     "id": 65252
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": "Saltspray",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "CallLigh.H",
+   "name": "Call Lightning",
+   "description": "Hit by Call Lightning",
+   "ids": [
+    {
+     "skill": "CallLightning",
+     "id": 66424
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": "Saltspray",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "FrozFury.H",
+   "name": "Frozen Fury",
+   "description": "Hit by Frozen Fury",
+   "ids": [
+    {
+     "skill": "FrozenFury",
+     "id": 65498
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": "Saltspray",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "RollFlame.H",
+   "name": "Rolling Flame",
+   "description": "Hit by Rolling Flame",
+   "ids": [
+    {
+     "skill": "RollingFlame",
+     "id": 67646
+    }
+   ]
+  },
+  {
+   "phase": "Purification 3",
+   "subgroup": "Saltspray",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "ShatEarth.H",
+   "name": "Shatter Earth",
+   "description": "Hit by Shatter Earth",
+   "ids": [
+    {
+     "skill": "ShatterEarth",
+     "id": 67104
+    },
+    {
+     "skill": "ShatterEarth2",
+     "id": 65241
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Tsunami.H",
+   "name": "Soo-Won Tsunami",
+   "description": "Hit by Soo-Won Tsunami",
+   "ids": [
+    {
+     "skill": "TsunamiSlamClawOrb",
+     "id": 64748
+    },
+    {
+     "skill": "TsunamiSlamTailOrb",
+     "id": 66489
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Claw.H",
+   "name": "Soo-Won Claw",
+   "description": "Hit by Soo-Won Claw",
+   "ids": [
+    {
+     "skill": "ClawSlap",
+     "id": 63588
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "SW.Pool.H",
+   "name": "Soo-Won Void Pool",
+   "description": "Hit by Soo-Won Void Pool",
+   "ids": [
+    {
+     "skill": "VoidPoolSooWon",
+     "id": 67739
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Tail.H",
+   "name": "Soo-Won Tail",
+   "description": "Hit by Soo-Won Tail",
+   "ids": [
+    {
+     "skill": "TsunamiSlamTail",
+     "id": 65192
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Torment.H",
+   "name": "Torment of the Void",
+   "description": "Hit by Torment of the Void (Bouncing Orbs)",
+   "ids": [
+    {
+     "skill": "TormentOfTheVoid",
+     "id": 64150
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "MagHail.H",
+   "name": "Magic Hail Hit",
+   "description": "Hit by Magic Hail",
+   "ids": [
+    {
+     "skill": "MagicHail",
+     "id": 64582
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Obliterator",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Firebomb.H",
+   "name": "Firebomb",
+   "description": "Hit by Firebomb",
+   "ids": [
+    {
+     "skill": "VoidObliteratorFirebomb",
+     "id": 61838
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Obliterator",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "WyvBreath.H",
+   "name": "Wyvern Breath",
+   "description": "Hit by Wyvern Breath",
+   "ids": [
+    {
+     "skill": "VoidObliteratorWyvernBreathDamage",
+     "id": 65462
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Obliterator",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "Charge.H",
+   "name": "Charge Hit",
+   "description": "Hit by Obliterator's Charge",
+   "ids": [
+    {
+     "skill": "VoidObliteratorCharge",
+     "id": 61895
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Obliterator",
+   "kind": "SubMechanic",
+   "short": "Charge.CC",
+   "name": "Charge CC",
+   "description": "CC'd by Obliterator's Charge",
+   "ids": []
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Goliath",
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "GlaSlam.H",
+   "name": "Glacial Slam Hit",
+   "description": "Hit by Glacial Slam",
+   "ids": [
+    {
+     "skill": "GlacialSlam",
+     "id": 66446
+    }
+   ]
+  },
+  {
+   "phase": "Soo Won",
+   "subgroup": "Goliath",
+   "kind": "SubMechanic",
+   "short": "GlaSlam.CC",
+   "name": "Glacial Slam CC",
+   "description": "CC'd by Glacial Slam",
+   "ids": []
+  },
+  {
+   "phase": "Purification 4",
+   "subgroup": null,
+   "kind": "PlayerDstHealthDamageHitMechanic",
+   "short": "GraspVoid.H",
+   "name": "Grasp of the Void",
+   "description": "Hit by Grasp of the Void (Final Orb Projectile)",
+   "ids": [
+    {
+     "skill": "GraspOfTheVoid",
+     "id": 64161
+    }
+   ]
+  }
+ ]
+}

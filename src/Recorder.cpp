@@ -72,7 +72,8 @@ namespace Recorder
 			"src_id,src_name,src_prof,src_elite,src_team,src_self,"
 			"dst_id,dst_name,dst_prof,dst_elite,dst_team,dst_self,"
 			"skill_id,skill_name,value,buff_dmg,result,"
-			"src_instid,dst_instid,src_master_instid,dst_master_instid\n";
+			"src_instid,dst_instid,src_master_instid,dst_master_instid,"
+			"ev_src_agent,ev_dst_agent,overstack,pad\n";
 
 		// ArcDPS statechange IDs (from the ArcDPS evtc docs; names are for
 		// readability only, the numeric code is always written too).
@@ -181,11 +182,20 @@ namespace Recorder
 				AppendU64(s, ev->SrcInstID);           s += ',';
 				AppendU64(s, ev->DstInstID);           s += ',';
 				AppendU64(s, ev->SrcMasterInstID);     s += ',';
-				AppendU64(s, ev->DstMasterInstID);
+				AppendU64(s, ev->DstMasterInstID);     s += ',';
+				// Raw fields: several statechanges keep their payload here
+				// instead of in the agent structs (e.g. IDTOGUID packs a
+				// 16-byte GUID into src_agent+dst_agent; ATTACKTARGET and
+				// TARGETABLE reference agents by these IDs).
+				char raw[96];
+				snprintf(raw, sizeof(raw), "%016llx,%016llx,%u,%02x%02x%02x%02x",
+					(unsigned long long)ev->SrcAgent, (unsigned long long)ev->DstAgent, ev->OverstackValue,
+					ev->Pad[0], ev->Pad[1], ev->Pad[2], ev->Pad[3]);
+				s += raw;
 			}
 			else
 			{
-				s += ",,,,,,,,";
+				s += ",,,,,,,,,,,,";
 			}
 			s += '\n';
 			return s;
@@ -226,7 +236,7 @@ namespace Recorder
 				s += ",,";                         // skill_id, skill_name
 				AppendU64(s, acc.Damage);   s += ',';
 				AppendU64(s, acc.Hits);            // hit count in buff_dmg column
-				s += ",,,,,\n";
+				s += ",,,,,,,,,\n";
 				PushData(std::move(s));
 			}
 			Dmg[aStream].clear();
@@ -428,6 +438,14 @@ namespace Recorder
 			EnsureFileOpen();
 			PushData(FormatRow(ev->Time, aStream, "BUFF_APPLY", "", aData));
 			return;
+		}
+
+		/* Enemy hits on you, one row each, whatever the result (hit, block,
+		 * evade, invuln, ...): this is what mechanic checks look at. */
+		if (onSelf && aData->src && !IsPlayer(aData->src) && ev->SrcMasterInstID == 0)
+		{
+			EnsureFileOpen();
+			PushData(FormatRow(ev->Time, aStream, "HIT_SELF", ev->Buff ? "CONDI" : "DIRECT", aData));
 		}
 
 		/* Damage: condition tick (buff && value == 0) or direct hit. Only

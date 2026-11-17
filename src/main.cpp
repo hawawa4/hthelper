@@ -411,7 +411,7 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
 	AddonDef.Signature   = 0x48544D43; // "HTMC" - arbitrary, must be unique among addons
 	AddonDef.APIVersion  = NEXUS_API_VERSION;
 	AddonDef.Name        = ADDON_NAME;
-	AddonDef.Version     = { 0, 2, 0, 0 };
+	AddonDef.Version     = { 0, 2, 1, 0 };
 	AddonDef.Author      = "hawa";
 	AddonDef.Description = "Harvest Temple CM helper: flashes LEAVE THE INSTANCE NOW when you die.";
 	AddonDef.Load        = AddonLoad;
