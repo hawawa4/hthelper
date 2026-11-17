@@ -9,6 +9,16 @@ A Guild Wars 2 [Nexus](https://github.com/RaidcoreGG/Nexus) addon for the Harves
 - **Map:** reads MumbleLink (`DL_MUMBLE_LINK`). By default the overlay only shows in Harvest Temple (map 1437), and it clears when you change maps.
 - **Options** (Nexus → Addons → HTCM Helper): turn off the map filter, preview the overlay, see the current map ID.
 
+## Encounter timers
+In Harvest Temple, the addon works out which phase is running and shows the next mechanics at the top of the screen with a countdown. A big alert appears 3 seconds before **green**, **spread**, **red puddles** and Primordus' **Jaws**. While Giants or the Time Caster cast a CC (Death Scream, Stomp, Nightmare Epoch), you get a reactive alert.
+
+- **Schedule:** each dragon phase runs on a fixed script, timed from the moment the Dragonvoid becomes attackable. The callout table (`src/EncounterData.h`) is generated from `data/htcm_timeline.json` (`make encounter-data`).
+- **Live sync:** the clock syncs to live ArcDPS events: the Dragonvoid becoming targetable, orbs spawning, and the missiles and effect GUIDs that Elite Insights uses to reconstruct dragon attacks. Attacks that vary a lot between runs (Crystal Barrage, Shock Wave) are shown with `~` and don't move the clock.
+- **Options:** preview buttons, plus a diagnostics block showing which live signals actually arrive.
+- **Coverage:** timers exist for Jormag, Primordus, Kralkatorrik, Mordremoth and the start of Zhaitan. Soo-Won and Purifications 3 and 4 have no data yet.
+
+Testing without the game: `tools/ei_to_events.py` turns an Elite Insights JSON log into the live events the addon would see, and `make test EVENTS=<file>` replays them through the engine. It reports how far ahead and how accurately each mechanic was predicted.
+
 ## Recording
 While you're in Harvest Temple, the addon writes ArcDPS combat events to CSV files in `<GW2>/addons/HTCMHelper/recordings/`. It starts a new file for each instance, named `map<id>_<date>_<time>_<n>.csv`. Pulls are marked inside the file by `9:SQCOMBATSTART` / `10:SQCOMBATEND` state changes.
 

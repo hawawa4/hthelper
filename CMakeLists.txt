@@ -19,6 +19,7 @@ endif()
 add_library(htcm_helper SHARED
     src/main.cpp
     src/Recorder.cpp
+    src/Encounter.cpp
     ${imgui_SOURCE_DIR}/imgui.cpp
     ${imgui_SOURCE_DIR}/imgui_draw.cpp
     ${imgui_SOURCE_DIR}/imgui_widgets.cpp

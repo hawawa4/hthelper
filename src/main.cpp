@@ -10,6 +10,8 @@
 #include <windows.h>
 
 #include <algorithm>
+#include <cctype>
+#include <string>
 #include <atomic>
 #include <cmath>
 #include <cstdio>
@@ -19,6 +21,10 @@
 #include "Nexus.h"
 #include "font_anton.h"
 #include "Recorder.h"
+#include "Encounter.h"
+#include "EncounterData.h"
+
+#include <mmsystem.h>
 
 #include <shellapi.h>
 
@@ -104,6 +110,7 @@ namespace
 		EventsLocal++;
 		HandleCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
 		Recorder::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs), "local");
+		Encounter::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
 	}
 
 	void OnCombatSquad(void* aEventArgs)
@@ -111,6 +118,7 @@ namespace
 		EventsSquad++;
 		HandleCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
 		Recorder::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs), "squad");
+		Encounter::OnCombatEvent(static_cast<EvCombatData_t*>(aEventArgs));
 	}
 
 	const char* StatechangeName(int aState)
@@ -244,6 +252,101 @@ namespace
 		aDL->AddText(aFont, aSize, aPos, aColor, aText);
 	}
 
+	/* ---- Encounter timers ---- */
+
+	bool ShowTimers    = true;
+	bool ShowBigAlerts = true;
+	constexpr int32_t BIG_ALERT_LEAD_MS = 3000;
+	constexpr int32_t TIMER_HORIZON_MS  = 15000;
+
+	ImU32 AlertColor(const char* aLabel)
+	{
+		if (strcmp(aLabel, "Green") == 0)       { return IM_COL32(90, 255, 90, 255); }
+		if (strcmp(aLabel, "Red puddles") == 0) { return IM_COL32(255, 70, 50, 255); }
+		if (strcmp(aLabel, "Spread") == 0)      { return IM_COL32(255, 220, 60, 255); }
+		if (strcmp(aLabel, "Jaws") == 0)        { return IM_COL32(255, 150, 40, 255); }
+		return IM_COL32(255, 255, 255, 255);
+	}
+
+	void DrawEncounter(ImDrawList* aDL, ImVec2 aScreen, uint64_t aNow)
+	{
+		const Encounter::State st = Encounter::GetState(aNow, TIMER_HORIZON_MS, 4);
+		if (st.Phase < 0 && st.Reactives.empty()) { return; }
+
+		ImFont* fRow = Fonts[FONT_NOTE].Font ? Fonts[FONT_NOTE].Font : ImGui::GetFont();
+		ImFont* fBig = Fonts[FONT_SUB].Font  ? Fonts[FONT_SUB].Font  : ImGui::GetFont();
+		const float sRow = Fonts[FONT_NOTE].Requested;
+		const float sBig = Fonts[FONT_SUB].Requested;
+		char buf[128];
+
+		/* Timer list, top center. */
+		if (ShowTimers && st.Phase >= 0)
+		{
+			const float rowH  = sRow * 1.15f;
+			const float width = sRow * 11.0f;
+			const float x0    = std::floor((aScreen.x - width) / 2);
+			float y           = std::floor(aScreen.y * 0.07f);
+			const int rows    = 1 + (int)st.Next.size();
+			aDL->AddRectFilled(ImVec2(x0 - 10, y - 6), ImVec2(x0 + width + 10, y + rows * rowH + 6), IM_COL32(0, 0, 0, 140), 6.0f);
+
+			const int el = (std::max)(0, st.ElapsedMs) / 1000;
+			snprintf(buf, sizeof(buf), "%s  %d:%02d", st.PhaseName, el / 60, el % 60);
+			aDL->AddText(fRow, sRow, ImVec2(x0, y), IM_COL32(200, 200, 200, 255), buf);
+			y += rowH;
+
+			for (const Encounter::Upcoming& n : st.Next)
+			{
+				const ImU32 col = n.BigAlert ? AlertColor(n.Label) : IM_COL32(230, 230, 230, 255);
+				aDL->AddText(fRow, sRow, ImVec2(x0, y), col, n.Label);
+				if (n.InMs > 0)
+				{
+					// "~" marks callouts whose timing varies a lot between runs.
+					snprintf(buf, sizeof(buf), "%s%.1f", n.SpreadMs > 1000 ? "~" : "", n.InMs / 1000.0f);
+				}
+				else
+				{
+					snprintf(buf, sizeof(buf), "now");
+				}
+				const float w = fRow->CalcTextSizeA(sRow, FLT_MAX, 0.0f, buf).x;
+				aDL->AddText(fRow, sRow, ImVec2(x0 + width - w, y), col, buf);
+				y += rowH;
+			}
+		}
+
+		if (!ShowBigAlerts) { return; }
+
+		/* Big alert: the next big callout within the lead time, or an active
+		 * reactive cast. */
+		const char* bigLabel = nullptr;
+		int32_t     bigIn    = 0;
+		ImU32       bigCol   = 0;
+		for (const Encounter::Upcoming& n : st.Next)
+		{
+			if (n.BigAlert && n.InMs >= -500 && n.InMs <= BIG_ALERT_LEAD_MS)
+			{
+				bigLabel = n.Label; bigIn = n.InMs; bigCol = AlertColor(n.Label);
+				break;
+			}
+		}
+		if (!bigLabel && !st.Reactives.empty())
+		{
+			bigLabel = st.Reactives[0].Label; bigIn = st.Reactives[0].RemainingMs; bigCol = IM_COL32(255, 150, 40, 255);
+		}
+		if (bigLabel)
+		{
+			std::string text = bigLabel;
+			for (char& c : text) { c = (char)toupper((unsigned char)c); }
+			if (bigIn > 0)
+			{
+				snprintf(buf, sizeof(buf), "  %.1f", bigIn / 1000.0f);
+				text += buf;
+			}
+			const ImVec2 ext = fBig->CalcTextSizeA(sBig, FLT_MAX, 0.0f, text.c_str());
+			DrawOutlinedText(aDL, fBig, sBig, ImVec2(std::floor((aScreen.x - ext.x) / 2), std::floor(aScreen.y * 0.22f)),
+				bigCol, IM_COL32(0, 0, 0, 255), text.c_str());
+		}
+	}
+
 	void OnRender()
 	{
 		// Reset when the map changes: you left (or got kicked from) the instance.
@@ -273,9 +376,17 @@ namespace
 		// triggers an atlas rebuild when the resolution changes).
 		UpdateFontSizes(screen);
 
-		if (!show) { return; }
+		const uint64_t now = timeGetTime();
+		Encounter::Tick(now, mapID);
 
 		ImDrawList* dl   = ImGui::GetForegroundDrawList();
+
+		// Dead: the death overlay replaces the encounter timers.
+		if (!show)
+		{
+			DrawEncounter(dl, screen, now);
+			return;
+		}
 
 		// Steady (no flashing): full-strength text/border, fixed tint.
 		const float pulse = 0.7f;
@@ -317,6 +428,26 @@ namespace
 		ImGui::Checkbox("Only show in Harvest Temple", &OnlyInHarvestTemple);
 		ImGui::Checkbox("Preview overlay", &Preview);
 		ImGui::TextDisabled("Requires ArcDPS for death detection.");
+
+		ImGui::Separator();
+		ImGui::Text("Encounter timers");
+		ImGui::Checkbox("Show upcoming mechanics", &ShowTimers);
+		ImGui::Checkbox("Big alerts (3s before green / spread / red / jaws)", &ShowBigAlerts);
+		if (ImGui::Button("Preview: Jormag"))    { Encounter::ForcePhase(1, timeGetTime()); }
+		ImGui::SameLine();
+		if (ImGui::Button("Preview: Primordus")) { Encounter::ForcePhase(2, timeGetTime()); }
+		ImGui::SameLine();
+		if (ImGui::Button("Stop preview"))       { Encounter::Reset(); }
+		{
+			const uint64_t now = timeGetTime();
+			const Encounter::State es = Encounter::GetState(now, 0, 0);
+			const Encounter::Debug ed = Encounter::GetDebug();
+			ImGui::Text("Phase: %s", es.PhaseName ? es.PhaseName : "(none)");
+			if (es.Phase >= 0) { ImGui::SameLine(); ImGui::Text("+%.1fs", es.ElapsedMs / 1000.0f); }
+			ImGui::Text("Last sync: %s (%+d ms)", ed.LastSync.empty() ? "-" : ed.LastSync.c_str(), ed.LastSyncDeltaMs);
+			ImGui::Text("Live signals: targetable %u, attack-target %u, orbs %u", ed.Targetables, ed.AttackTargets, ed.OrbSpawns);
+			ImGui::Text("              missiles %u, effects %u, GUIDs %u, triggers matched %u", ed.Missiles, ed.Effects, ed.GuidMappings, ed.TriggerHits);
+		}
 
 		ImGui::Separator();
 		ImGui::Text("Recording");
@@ -411,9 +542,9 @@ extern "C" __declspec(dllexport) AddonDefinition_t* GetAddonDef()
 	AddonDef.Signature   = 0x48544D43; // "HTMC" - arbitrary, must be unique among addons
 	AddonDef.APIVersion  = NEXUS_API_VERSION;
 	AddonDef.Name        = ADDON_NAME;
-	AddonDef.Version     = { 0, 2, 1, 0 };
+	AddonDef.Version     = { 0, 3, 0, 0 };
 	AddonDef.Author      = "hawa";
-	AddonDef.Description = "Harvest Temple CM helper: flashes LEAVE THE INSTANCE NOW when you die.";
+	AddonDef.Description = "Harvest Temple CM helper: mechanic timers, alerts, and LEAVE THE INSTANCE NOW when you die.";
 	AddonDef.Load        = AddonLoad;
 	AddonDef.Unload      = AddonUnload;
 	AddonDef.Flags       = EAddonFlags::None;

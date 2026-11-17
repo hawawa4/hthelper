@@ -246,18 +246,18 @@ struct MumbleLinkedMem_t
 	float           AvatarPosition[3];
 	float           AvatarFront[3];
 	float           AvatarTop[3];
-	wchar_t         Name[256];
+	uint16_t         Name[256];
 	float           CameraPosition[3];
 	float           CameraFront[3];
 	float           CameraTop[3];
-	wchar_t         Identity[256];
+	uint16_t         Identity[256];
 	uint32_t        ContextLength;
 	union
 	{
 		MumbleContext_t Context;
 		uint8_t         ContextRaw[256];
 	};
-	wchar_t         Description[2048];
+	uint16_t         Description[2048];
 };
 
 /* Layout checks against the real Nexus / ArcDPS / MumbleLink structs (x64). */

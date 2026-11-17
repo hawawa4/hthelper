@@ -16,6 +16,7 @@ IMGUI_STAMP   := $(IMGUI_DIR)/.v$(IMGUI_VERSION)
 
 SRC := src/main.cpp \
        src/Recorder.cpp \
+       src/Encounter.cpp \
        third_party/imgui/imgui.cpp \
        third_party/imgui/imgui_draw.cpp \
        third_party/imgui/imgui_widgets.cpp \
@@ -29,7 +30,7 @@ all: $(OUT)
 $(OUT): $(OBJ)
 	$(CXX) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
-build/obj/%.o: %.cpp src/Nexus.h src/Recorder.h src/font_anton.h | $(IMGUI_STAMP)
+build/obj/%.o: %.cpp src/Nexus.h src/Recorder.h src/Encounter.h src/EncounterData.h src/font_anton.h | $(IMGUI_STAMP)
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
@@ -45,6 +46,20 @@ $(IMGUI_STAMP):
 	@rm -f $(IMGUI_DIR).tar.gz
 	@touch $@
 
+# Regenerate the callout table after changing data/ or the generator.
+encounter-data:
+	python3 tools/gen_encounter_data.py data/htcm_timeline.json data/htcm_ei.json src/EncounterData.h
+
+# Native (Linux) replay test of the encounter engine. Pass EVENTS=file from
+# tools/ei_to_events.py.
+build/encounter_replay: tests/encounter_replay.cpp src/Encounter.cpp src/Encounter.h src/EncounterData.h src/Nexus.h
+	@mkdir -p build
+	g++ -std=c++17 -O1 -Wall -Isrc tests/encounter_replay.cpp src/Encounter.cpp -o $@
+
+test: build/encounter_replay
+	@if [ -z "$(EVENTS)" ]; then echo "usage: make test EVENTS=events.txt"; exit 2; fi
+	build/encounter_replay $(EVENTS)
+
 imgui: $(IMGUI_STAMP)
 
 clean:
@@ -53,4 +68,4 @@ clean:
 distclean: clean
 	rm -rf $(IMGUI_DIR)
 
-.PHONY: all imgui clean distclean
+.PHONY: all imgui encounter-data test clean distclean
