@@ -42,5 +42,5 @@ Copy `htcm_helper.dll` into `<GW2>/addons/`, then enable it in the Nexus menu (C
 - `src/Nexus.h`: a minimal copy of the Nexus API v6 structs, plus the ArcDPS and MumbleLink structs it needs
 - `third_party/imgui`: ImGui 1.80, the version Nexus uses (MIT). Not committed: `make` downloads it on first build and checks its SHA-256. CMake fetches the same tarball with `FetchContent`. `make distclean` removes it.
 - `data/`: HTCM encounter data (skill/buff/species/effect IDs, mechanics per phase, phase durations). Start with `data/htcm.md`.
-- `tools/`: scripts that regenerate `data/` from Elite Insights' source and GW2 Wingman.
+- `tools/`: scripts that regenerate `data/` from Elite Insights' source, GW2 Wingman, and Elite Insights JSON logs (e.g. from `https://dps.report/getJson?permalink=<id>`).
 - `third_party/fonts`: the [Anton](https://github.com/googlefonts/AntonFont) font (SIL OFL 1.1), cut down to printable ASCII. It's embedded as `src/font_anton.h` (regenerate with `xxd -i -n AntonAscii_ttf`). The addon registers it with Nexus at the pixel size your resolution needs, so the text is drawn at 1:1 instead of stretched.

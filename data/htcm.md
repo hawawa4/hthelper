@@ -3,6 +3,7 @@
 Reference data for building HTCM helpers. Generated files next to this one:
 
 - `htcm_ei.json`: every skill, buff, species and effect ID that Elite Insights' Harvest Temple logic uses, plus EI's mechanic list grouped by phase. Regenerate with `tools/extract_ei_htcm.py` (EI commit `5bddc4c`).
+- `htcm_timeline.md` / `.json`: **when each mechanic happens inside each phase**, from 11 CM logs on dps.report. Regenerate with `tools/analyze_ei_logs.py`.
 - `htcm_phase_durations.json`: phase lengths of 15 recent CM kills from [GW2 Wingman](https://gw2wingman.nevermindcreations.de) (era 26-11). Regenerate with `tools/wingman_phase_stats.py`.
 
 Everything here comes from EI's parser and Wingman summaries, not from our own recordings yet. Treat IDs as "very likely right" and timings as rough until a recording confirms them.
@@ -45,7 +46,7 @@ Effects (ground AoEs, orbs) arrive as `51:EFFECT2` state changes carrying a per-
 | Soo-Won 2 | 64 | 82 | 92 |  |
 | Purification 4 | 22 | 28 | 38 |  |
 
-These are lengths, not start times. Wingman doesn't serve full timelines without a manual reparse, so *when* each attack happens inside a phase has to come from our own recordings (or from `.zevtc` logs run through Elite Insights).
+These are lengths, not start times. For *when* each attack happens inside a phase, see `htcm_timeline.md`.
 
 ## Mechanics by phase (from Elite Insights)
 
