@@ -20,16 +20,19 @@ jobs:
         with:
           fetch-depth: 0  # full history + tags for the changelog
 
-      - name: Install MinGW-w64
+      - name: Download llvm-mingw
+        env:
+          LLVM_MINGW: llvm-mingw-20261020-ucrt-ubuntu-22.04-x86_64
+          SHA256: 55064b60b991a1e1e8090b8c2f84e82b22cfe5903d12c159d65064cf5e8ae335
         run: |
-          # Skip the man-db rebuild apt triggers after installing; it takes minutes on GitHub runners.
-          echo 'set man-db/auto-update false' | sudo debconf-communicate >/dev/null
-          sudo rm -f /var/lib/man-db/auto-update
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends g++-mingw-w64-x86-64-posix
+          curl -fsSL -o "$RUNNER_TEMP/llvm-mingw.tar.xz" \
+            "https://github.com/mstorsjo/llvm-mingw/releases/download/20261020/$LLVM_MINGW.tar.xz"
+          echo "$SHA256  $RUNNER_TEMP/llvm-mingw.tar.xz" | sha256sum -c -
+          tar xf "$RUNNER_TEMP/llvm-mingw.tar.xz" -C "$RUNNER_TEMP"
+          echo "CXX=$RUNNER_TEMP/$LLVM_MINGW/bin/x86_64-w64-mingw32-clang++" >> "$GITHUB_ENV"
 
       - name: Build DLL
-        run: make -j"$(nproc)"
+        run: make -j"$(nproc)" CXX="$CXX"
 
       - name: Work out version
         id: version
